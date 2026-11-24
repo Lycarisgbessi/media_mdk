@@ -120,22 +120,22 @@ async function main() {
       data: { name, slug, color, icon, description, parentId, order, metaTitle: `${name} — actualités et analyses`, metaDescription: `Toute l'actualité ${name.toLowerCase()} : articles, podcasts et vidéos.` },
     })
 
-  const cActualites = await cat('Actualités', 'actualites', '#0E7C3F', 'Newspaper', "L'essentiel de l'actualité, en continu.", undefined, 0)
-  await cat('Actualité générale', 'actualite-generale', '#2E8B57', 'Globe', 'Toute l’actualité générale au fil de la journée.', cActualites.id, 1)
-  await cat('Faits divers', 'faits-divers', '#B8860B', 'AlertTriangle', 'Faits divers et sécurité.', cActualites.id, 2)
-  await cat('Justice', 'justice', '#8B4513', 'Scale', 'Tribunaux, affaires et procédures.', cActualites.id, 3)
-  const cInternational = await cat('International', 'international', '#1F6E8C', 'Earth', 'Le monde en mouvement : diplomacy, conflits, coopération.', undefined, 1)
-  const cPolitique = await cat('Politique', 'politique', '#0E7C3F', 'Landmark', 'Gouvernement, parlement, partis et élections.', undefined, 2)
-  const cSociete = await cat('Société', 'societe', '#C77D02', 'Users', 'Consommation, famille, genres, religions, transports.', undefined, 3)
-  const cEconomie = await cat('Économie', 'economie', '#0B6E4F', 'TrendingUp', 'Entreprises, marchés, emploi et pouvoir d’achat.', undefined, 4)
-  const cCulture = await cat('Culture', 'culture', '#A23B72', 'Palette', 'Cinéma, musique, livres, expositions et spectacles.', undefined, 5)
-  const cSport = await cat('Sport', 'sport', '#D92632', 'Trophy', 'Tous les sports, tous les résultats.', undefined, 6)
-  const cEducation = await cat('Éducation', 'education', '#6A4C93', 'GraduationCap', 'École, lycée, université et pédagogie.', undefined, 7)
-  const cSante = await cat('Santé', 'sante', '#2A9D8F', 'HeartPulse', 'Médecine, hôpitaux, prévention et bien-être.', undefined, 8)
-  const cTech = await cat('Technologie', 'technologie', '#4361EE', 'Cpu', 'Numérique, IA, innovation et startups.', undefined, 9)
-  const cInterviews = await cat('Interviews', 'interviews', '#7A5C00', 'MicVocal', 'Les voix qui font l’actualité.', undefined, 10)
-  const cAnalyses = await cat('Analyses et opinions', 'analyses-opinions', '#4A4A4A', 'Brain', 'Décryptages, tribunes et points de vue.', undefined, 11)
-  const cDossiers = await cat('Dossiers spéciaux', 'dossiers-speciaux', '#946B2D', 'FolderOpen', 'Thèmes temporaires traités en profondeur.', undefined, 12)
+  const cActualites = await cat('Actualités', 'actualites', '#0A0A0A', 'Newspaper', "L'essentiel de l'actualité, en continu.", undefined, 0)
+  await cat('Actualité générale', 'actualite-generale', '#404040', 'Globe', 'Toute l’actualité générale au fil de la journée.', cActualites.id, 1)
+  await cat('Faits divers', 'faits-divers', '#A31621', 'AlertTriangle', 'Faits divers et sécurité.', cActualites.id, 2)
+  await cat('Justice', 'justice', '#701117', 'Scale', 'Tribunaux, affaires et procédures.', cActualites.id, 3)
+  const cInternational = await cat('International', 'international', '#1A1A1A', 'Earth', 'Le monde en mouvement : diplomacy, conflits, coopération.', undefined, 1)
+  const cPolitique = await cat('Politique', 'politique', '#0A0A0A', 'Landmark', 'Gouvernement, parlement, partis et élections.', undefined, 2)
+  const cSociete = await cat('Société', 'societe', '#6E6E6E', 'Users', 'Consommation, famille, genres, religions, transports.', undefined, 3)
+  const cEconomie = await cat('Économie', 'economie', '#8C0E17', 'TrendingUp', 'Entreprises, marchés, emploi et pouvoir d’achat.', undefined, 4)
+  const cCulture = await cat('Culture', 'culture', '#D92632', 'Palette', 'Cinéma, musique, livres, expositions et spectacles.', undefined, 5)
+  const cSport = await cat('Sport', 'sport', '#C8102E', 'Trophy', 'Tous les sports, tous les résultats.', undefined, 6)
+  const cEducation = await cat('Éducation', 'education', '#4A4A4A', 'GraduationCap', 'École, lycée, université et pédagogie.', undefined, 7)
+  const cSante = await cat('Santé', 'sante', '#E5545F', 'HeartPulse', 'Médecine, hôpitaux, prévention et bien-être.', undefined, 8)
+  const cTech = await cat('Technologie', 'technologie', '#2A2A2A', 'Cpu', 'Numérique, IA, innovation et startups.', undefined, 9)
+  const cInterviews = await cat('Interviews', 'interviews', '#99101B', 'MicVocal', 'Les voix qui font l’actualité.', undefined, 10)
+  const cAnalyses = await cat('Analyses et opinions', 'analyses-opinions', '#525252', 'Brain', 'Décryptages, tribunes et points de vue.', undefined, 11)
+  const cDossiers = await cat('Dossiers spéciaux', 'dossiers-speciaux', '#7A7A7A', 'FolderOpen', 'Thèmes temporaires traités en profondeur.', undefined, 12)
   void cDossiers; void cInternational; void cSante; void cEducation; void cAnalyses; void cInterviews
 
   // ------------------------------------------------------------------
@@ -1062,7 +1062,7 @@ La rentrée culturelle s'annonce riche : cinq expositions majeures ouvrent leurs
       logoUrl: '',
       logoDarkUrl: '',
     },
-    colors: { primaryColor: '#0E7C3F', accentColor: '#F2C200', actionColor: '#D92632' },
+    colors: { primaryColor: '#0A0A0A', accentColor: '#D92632', actionColor: '#A31621' },
     modules: { moduleFmActive: true, moduleTvActive: true },
     general: {
       timezone: 'Atlantic/Reykjavik', language: 'fr',

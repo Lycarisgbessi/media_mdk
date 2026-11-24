@@ -190,7 +190,7 @@ function shade(hex: string, amount: number): string {
 function applyBrandColors(settings: SiteSettings) {
   if (typeof document === 'undefined') return
   const root = document.documentElement
-  const primary = /^#[0-9a-fA-F]{6}$/.test(settings.primaryColor) ? settings.primaryColor : '#0E7C3F'
+  const primary = /^#[0-9a-fA-F]{6}$/.test(settings.primaryColor) ? settings.primaryColor : '#0A0A0A'
   root.style.setProperty('--marque', primary)
   root.style.setProperty('--marque-fonce', shade(primary, -0.12))
   root.style.setProperty('--marque-clair', shade(primary, 0.85))
@@ -279,9 +279,9 @@ export default function AppShell() {
   useEffect(() => {
     if (!settings) return
     const customized =
-      settings.primaryColor !== '#0E7C3F' ||
-      settings.accentColor !== '#F2C200' ||
-      settings.actionColor !== '#D92632'
+      settings.primaryColor !== '#0A0A0A' ||
+      settings.accentColor !== '#D92632' ||
+      settings.actionColor !== '#A31621'
     if (customized) applyBrandColors(settings)
   }, [settings])
 

@@ -2,7 +2,7 @@
 
 Plateforme d'information généraliste (site web, module FM audio, module TV vidéo)
 développée selon un cahier des charges v3.0. Interface entièrement en français,
-charte graphique vert / jaune / rouge, mode sombre, PWA.
+charte graphique noir / rouge, mode sombre, PWA.
 
 ## Stack
 

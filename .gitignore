@@ -65,3 +65,6 @@ db/*.db-journal
 # Artefacts d'agents IA
 tool-results/
 .zscripts/dev.pid
+
+.vercel
+.env*
