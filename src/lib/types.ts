@@ -74,8 +74,8 @@ export interface SiteSettings {
 }
 
 export const DEFAULT_SETTINGS: SiteSettings = {
-  siteName: 'MÉDIA',
-  slogan: "L'information qui compte, en continu",
+  siteName: 'MDK Guinée',
+  slogan: "L'info qui nous rapproche",
   description: 'Plateforme d\'information généraliste : articles, podcasts (FM) et vidéos (TV).',
   logoUrl: '',
   logoDarkUrl: '',

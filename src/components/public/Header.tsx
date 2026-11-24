@@ -90,13 +90,13 @@ function BrandMark({ onClick, compact }: { onClick: () => void; compact?: boolea
     >
       {logo ? (
         // Logo complet : bandeau affiché dans son ratio d'origine, sans déformation.
-        <span className="relative flex shrink-0 items-center transition-transform group-hover:scale-[1.03]">
+        <span className="flex shrink-0 items-center transition-transform group-hover:scale-[1.02]">
           <img
             src={logo}
-            alt={settings?.siteName || 'Média'}
+            alt={settings?.siteName || 'MDK Guinée'}
             className={cn(
               'w-auto object-contain',
-              compact ? 'h-8 max-w-[42vw]' : 'h-9 max-w-[46vw] sm:h-10 sm:max-w-[280px]',
+              compact ? 'h-8 max-w-[62vw]' : 'h-9 max-w-[74vw] sm:h-11 sm:max-w-[360px]',
             )}
             onError={(e) => {
               // logo indisponible : retour au monogramme par défaut
@@ -111,7 +111,6 @@ function BrandMark({ onClick, compact }: { onClick: () => void; compact?: boolea
           >
             M
           </span>
-          <span className="live-dot absolute -right-1.5 -top-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-rouge" aria-hidden="true" />
         </span>
       ) : (
         <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-marque shadow-md shadow-marque/25 transition-transform group-hover:scale-105">

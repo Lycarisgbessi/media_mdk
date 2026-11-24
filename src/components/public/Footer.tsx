@@ -78,16 +78,15 @@ export function Footer() {
             >
               {logoFooter ? (
                 // Logo complet : bandeau dans son ratio d'origine, sans déformation.
-                <span className="relative flex shrink-0 items-center">
+                <span className="flex shrink-0 items-center">
                   <img
                     src={logoFooter}
-                    alt={settings?.siteName || 'Média'}
-                    className="h-9 w-auto max-w-[200px] object-contain sm:h-10 sm:max-w-[240px]"
+                    alt={settings?.siteName || 'MDK Guinée'}
+                    className="h-10 w-auto max-w-[260px] object-contain"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none'
                     }}
                   />
-                  <span className="live-dot absolute -right-1.5 -top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[#0A0A0A] bg-rouge" aria-hidden="true" />
                 </span>
               ) : (
                 <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-marque shadow-lg">

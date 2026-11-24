@@ -288,9 +288,9 @@ export default function AppShell() {
   // Titre de l'onglet : réinitialisé à chaque changement de vue ; les vues
   // détaillées (article, vidéo…) le remplacent après chargement de leurs données.
   useEffect(() => {
-    const name = settings?.siteName || 'MÉDIA'
+    const name = settings?.siteName || 'MDK Guinée'
     if (view.name === 'article' || view.name === 'video') return
-    document.title = `${name} — ${settings?.slogan || "L'information qui compte, en continu"}`
+    document.title = `${name} — ${settings?.slogan || "L'info qui nous rapproche"}`
   }, [view, settings])
 
   // Espace pro (admin / login) : rendu plein écran sans en-tête public

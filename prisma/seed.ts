@@ -1056,11 +1056,11 @@ La rentrée culturelle s'annonce riche : cinq expositions majeures ouvrent leurs
   console.log('⚙️ Réglages...')
   const settings: Record<string, unknown> = {
     identity: {
-      siteName: 'MÉDIA',
-      slogan: "L'information qui compte, en continu",
+      siteName: 'MDK Guinée',
+      slogan: "L'info qui nous rapproche",
       description: "Plateforme d'information généraliste : articles, podcasts (FM) et reportages vidéo (TV).",
-      logoUrl: '',
-      logoDarkUrl: '',
+      logoUrl: '/logo.png',
+      logoDarkUrl: '/logo-dark.png',
     },
     colors: { primaryColor: '#0A0A0A', accentColor: '#BE070F', actionColor: '#85060C' },
     modules: { moduleFmActive: true, moduleTvActive: true },
@@ -1070,7 +1070,7 @@ La rentrée culturelle s'annonce riche : cinq expositions majeures ouvrent leurs
       maintenanceMode: false, dataSavingMode: false,
     },
     seo: {
-      seoTitle: 'MÉDIA — L’information qui compte, en continu',
+      seoTitle: 'MDK Guinée — L’info qui nous rapproche',
       seoDescription: 'Toute l’actualité générale, politique, économique, culturelle et sportive, en articles, podcasts et vidéos.',
       seoKeywords: 'actualités, information, podcast, radio, vidéo, reportages',
       minSeoScore: 0, seoAssistantEnabled: true, aiAssistantEnabled: true,

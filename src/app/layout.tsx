@@ -16,17 +16,17 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MÉDIA — L'information qui compte, en continu",
-    template: "%s | MÉDIA",
+    default: "MDK Guinée — L'info qui nous rapproche",
+    template: "%s | MDK Guinée",
   },
   description:
     "Plateforme d'information généraliste : articles, podcasts (FM) et reportages vidéo (TV). Actualités, économie, culture, sport, société.",
   keywords: ["actualités", "média", "podcasts", "radio", "TV", "reportages", "information"],
   manifest: "/manifest.json",
-  applicationName: "MÉDIA",
+  applicationName: "MDK Guinée",
   appleWebApp: {
     capable: true,
-    title: "MÉDIA",
+    title: "MDK Guinée",
     statusBarStyle: "black-translucent",
   },
   icons: {
