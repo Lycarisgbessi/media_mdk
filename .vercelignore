@@ -1,0 +1,12 @@
+# Ne jamais téléverser les secrets locaux vers Vercel
+.env
+.env.local
+.env*.local
+.auth-secret
+
+# Artefacts locaux
+db/*.db
+db/*.db-journal
+tool-results/
+node_modules
+.next
