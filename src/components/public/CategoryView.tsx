@@ -363,7 +363,7 @@ export function CategoryView({ slug }: { slug: string }) {
   }
 
   const Icon = categoryIcon(cat.icon)
-  const bannerColor = cat.color || '#0E7C3F'
+  const bannerColor = cat.color || '#0A0A0A'
   const textColor = contrastText(bannerColor)
   const segments: { id: Mode; label: string }[] = [
     { id: 'all', label: 'Tous' },

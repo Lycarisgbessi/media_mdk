@@ -61,9 +61,11 @@ export function Footer() {
   }, [])
 
   const goPage = (slug: string) => navigate({ name: 'page', slug })
+  // Pied de page toujours sombre : on privilégie la variante claire du logo.
+  const logoFooter = settings?.logoDarkUrl?.trim() || settings?.logoUrl?.trim() || null
 
   return (
-    <footer className="mt-auto bg-[#0D1512] text-white/80 dark:bg-black/40">
+    <footer className="mt-auto bg-[#0A0A0A] text-white/80 dark:bg-black/40">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:py-12 lg:px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {/* Marque */}
@@ -74,32 +76,32 @@ export function Footer() {
               className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-2 focus-visible:outline-jaune"
               aria-label="Retour à l'accueil"
             >
-              <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-marque shadow-lg">
-                {settings?.logoUrl?.trim() ? (
+              {logoFooter ? (
+                // Logo complet : bandeau dans son ratio d'origine, sans déformation.
+                <span className="relative flex shrink-0 items-center">
                   <img
-                    src={settings.logoUrl}
-                    alt=""
-                    className="h-full w-full object-cover"
+                    src={logoFooter}
+                    alt={settings?.siteName || 'Média'}
+                    className="h-9 w-auto max-w-[200px] object-contain sm:h-10 sm:max-w-[240px]"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none'
-                      const fallback = e.currentTarget.nextElementSibling as HTMLElement | null
-                      if (fallback) fallback.style.display = 'block'
                     }}
                   />
-                ) : null}
-                <span
-                  className="text-xl font-black text-white"
-                  style={{ display: settings?.logoUrl?.trim() ? 'none' : 'block' }}
-                >
-                  M
+                  <span className="live-dot absolute -right-1.5 -top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[#0A0A0A] bg-rouge" aria-hidden="true" />
                 </span>
-                <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0D1512] bg-rouge" aria-hidden="true" />
-              </span>
-              <span className="text-base font-black uppercase tracking-wider text-white">
-                {settings?.siteName || 'Média'}
-              </span>
+              ) : (
+                <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-marque shadow-lg">
+                  <span className="text-xl font-black text-white">M</span>
+                  <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0A0A0A] bg-rouge" aria-hidden="true" />
+                </span>
+              )}
+              {!logoFooter && (
+                <span className="text-base font-black uppercase tracking-wider text-white">
+                  {settings?.siteName || 'Média'}
+                </span>
+              )}
             </button>
-            {settings?.slogan && <p className="mt-3 text-xs uppercase tracking-widest text-jaune">{settings.slogan}</p>}
+            {settings?.slogan && <p className="mt-3 text-xs uppercase tracking-widest text-[#F04B54]">{settings.slogan}</p>}
             {settings?.description && <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">{settings.description}</p>}
 
             {socialLinks.filter((s) => s.active).length > 0 && (

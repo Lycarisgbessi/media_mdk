@@ -122,8 +122,8 @@ function drawShareVisual(siteName: string, title: string): string | null {
 
   // Fond dégradé vert foncé → vert
   const gradient = ctx.createLinearGradient(0, 0, 1080, 1350)
-  gradient.addColorStop(0, '#085A2C')
-  gradient.addColorStop(1, '#0E7C3F')
+  gradient.addColorStop(0, '#85060C')
+  gradient.addColorStop(1, '#BE070F')
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, 1080, 1350)
 
@@ -142,7 +142,7 @@ function drawShareVisual(siteName: string, title: string): string | null {
   ctx.beginPath()
   ctx.arc(120, 170, 58, 0, Math.PI * 2)
   ctx.fill()
-  ctx.fillStyle = '#085A2C'
+  ctx.fillStyle = '#85060C'
   ctx.font = 'bold 64px Georgia, serif'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'

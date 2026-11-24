@@ -55,14 +55,14 @@
 :root {
   --radius: 0.625rem;
 
-  /* Couleurs de marque — noir dominant, rouge accent, rouge sombre signal */
+  /* Couleurs de marque — noir dominant, rouge logo accent, rouge sombre signal */
   --marque: #0A0A0A;
   --marque-fonce: #000000;
   --marque-clair: #F0F0F0;
-  --jaune: #D92632;
-  --jaune-clair: #FBE9EA;
-  --rouge: #A31621;
-  --rouge-clair: #F6DEE0;
+  --jaune: #BE070F;
+  --jaune-clair: #FAE8E9;
+  --rouge: #85060C;
+  --rouge-clair: #F2DBDD;
 
   --background: #FCFCFC;
   --foreground: #131313;
@@ -78,15 +78,15 @@
   --muted-foreground: #5E5E5E;
   --accent: #EFEFEF;
   --accent-foreground: #0A0A0A;
-  --destructive: #A31621;
+  --destructive: #85060C;
   --border: #E5E5E5;
   --input: #D9D9D9;
   --ring: #0A0A0A;
   --chart-1: #0A0A0A;
-  --chart-2: #D92632;
-  --chart-3: #A31621;
+  --chart-2: #BE070F;
+  --chart-3: #85060C;
   --chart-4: #8A8A8A;
-  --chart-5: #E5545F;
+  --chart-5: #D60810;
   --sidebar: #FFFFFF;
   --sidebar-foreground: #131313;
   --sidebar-primary: #0A0A0A;
@@ -100,12 +100,12 @@
 .dark {
   /* En mode sombre, le noir de la charte est porté par les surfaces neutres ;
      l'accent de marque devient le rouge vif pour rester lisible. */
-  --marque: #F04350;
-  --marque-fonce: #C2232E;
+  --marque: #E01922;
+  --marque-fonce: #A90F17;
   --marque-clair: #2A1315;
-  --jaune: #FF6B75;
+  --jaune: #F04B54;
   --jaune-clair: #301519;
-  --rouge: #E0343F;
+  --rouge: #C4232C;
   --rouge-clair: #2E1215;
 
   --background: #0C0C0C;
@@ -114,7 +114,7 @@
   --card-foreground: #EAEAEA;
   --popover: #151515;
   --popover-foreground: #EAEAEA;
-  --primary: #F04350;
+  --primary: #E01922;
   --primary-foreground: #FFFFFF;
   --secondary: #1F1F1F;
   --secondary-foreground: #EAEAEA;
@@ -122,23 +122,23 @@
   --muted-foreground: #9A9A9A;
   --accent: #26171A;
   --accent-foreground: #F2C9CD;
-  --destructive: #E0343F;
+  --destructive: #C4232C;
   --border: #262626;
   --input: #2E2E2E;
-  --ring: #F04350;
-  --chart-1: #F04350;
-  --chart-2: #FF6B75;
-  --chart-3: #E0343F;
+  --ring: #E01922;
+  --chart-1: #E01922;
+  --chart-2: #F04B54;
+  --chart-3: #C4232C;
   --chart-4: #9E9E9E;
-  --chart-5: #EFA0A6;
+  --chart-5: #EE8A92;
   --sidebar: #151515;
   --sidebar-foreground: #EAEAEA;
-  --sidebar-primary: #F04350;
+  --sidebar-primary: #E01922;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #26171A;
   --sidebar-accent-foreground: #F2C9CD;
   --sidebar-border: #262626;
-  --sidebar-ring: #F04350;
+  --sidebar-ring: #E01922;
 }
 
 @layer base {

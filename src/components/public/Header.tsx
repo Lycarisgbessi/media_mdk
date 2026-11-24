@@ -77,7 +77,10 @@ function categoryIcon(name?: string | null): LucideIcon {
 // ---------- Logo du média ----------
 function BrandMark({ onClick, compact }: { onClick: () => void; compact?: boolean }) {
   const settings = useAppStore((s) => s.settings)
-  const logo = settings?.logoUrl?.trim() || null
+  const { resolvedTheme } = useTheme()
+  const logoClair = settings?.logoUrl?.trim() || null
+  // En mode sombre : variante claire du logo si fournie, sinon le logo principal.
+  const logo = resolvedTheme === 'dark' ? settings?.logoDarkUrl?.trim() || logoClair : logoClair
   return (
     <button
       type="button"
@@ -85,36 +88,47 @@ function BrandMark({ onClick, compact }: { onClick: () => void; compact?: boolea
       className="group flex min-h-[44px] items-center gap-3 rounded-lg text-left focus-visible:outline-2 focus-visible:outline-marque"
       aria-label="Retour à l'accueil"
     >
-      <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-marque shadow-md shadow-marque/25 transition-transform group-hover:scale-105">
-        {logo ? (
+      {logo ? (
+        // Logo complet : bandeau affiché dans son ratio d'origine, sans déformation.
+        <span className="relative flex shrink-0 items-center transition-transform group-hover:scale-[1.03]">
           <img
             src={logo}
-            alt=""
-            className="h-full w-full object-cover"
+            alt={settings?.siteName || 'Média'}
+            className={cn(
+              'w-auto object-contain',
+              compact ? 'h-8 max-w-[42vw]' : 'h-9 max-w-[46vw] sm:h-10 sm:max-w-[280px]',
+            )}
             onError={(e) => {
               // logo indisponible : retour au monogramme par défaut
               e.currentTarget.style.display = 'none'
               const fallback = e.currentTarget.nextElementSibling as HTMLElement | null
-              if (fallback) fallback.style.display = 'block'
+              if (fallback) fallback.style.display = 'flex'
             }}
           />
-        ) : null}
-        <span
-          className="text-xl font-black leading-none text-white"
-          style={{ display: logo ? 'none' : 'block' }}
-        >
-          M
+          <span
+            className="h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-marque text-xl font-black leading-none text-white shadow-md shadow-marque/25"
+            style={{ display: 'none' }}
+          >
+            M
+          </span>
+          <span className="live-dot absolute -right-1.5 -top-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-rouge" aria-hidden="true" />
         </span>
-        <span className="live-dot absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-rouge" aria-hidden="true" />
-      </span>
-      <span className="flex flex-col items-start leading-none">
-        <span className={cn('font-black uppercase tracking-wider text-foreground transition-all', compact ? 'text-sm' : 'text-base sm:text-lg')}>
-          {settings?.siteName || 'Média'}
+      ) : (
+        <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-marque shadow-md shadow-marque/25 transition-transform group-hover:scale-105">
+          <span className="text-xl font-black leading-none text-white">M</span>
+          <span className="live-dot absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-rouge" aria-hidden="true" />
         </span>
-        {!compact && settings?.slogan && (
-          <span className="mt-1 hidden text-[11px] text-muted-foreground sm:block">{settings.slogan}</span>
-        )}
-      </span>
+      )}
+      {!logo && (
+        <span className="flex flex-col items-start leading-none">
+          <span className={cn('font-black uppercase tracking-wider text-foreground transition-all', compact ? 'text-sm' : 'text-base sm:text-lg')}>
+            {settings?.siteName || 'Média'}
+          </span>
+          {!compact && settings?.slogan && (
+            <span className="mt-1 hidden text-[11px] text-muted-foreground sm:block">{settings.slogan}</span>
+          )}
+        </span>
+      )}
     </button>
   )
 }

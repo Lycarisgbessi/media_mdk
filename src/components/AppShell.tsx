@@ -280,8 +280,8 @@ export default function AppShell() {
     if (!settings) return
     const customized =
       settings.primaryColor !== '#0A0A0A' ||
-      settings.accentColor !== '#D92632' ||
-      settings.actionColor !== '#A31621'
+      settings.accentColor !== '#BE070F' ||
+      settings.actionColor !== '#85060C'
     if (customized) applyBrandColors(settings)
   }, [settings])
 

@@ -76,7 +76,7 @@ export async function POST(req: Request) {
       name: data.name,
       slug,
       parentId: data.parentId ?? null,
-      color: data.color ?? '#0E7C3F',
+      color: data.color ?? '#0A0A0A',
       icon: data.icon ?? null,
       description: data.description ?? null,
       order: data.order ?? 0,
