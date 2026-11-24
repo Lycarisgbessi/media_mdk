@@ -1,0 +1,41 @@
+{
+  "name": "MÉDIA — L'information qui compte, en continu",
+  "short_name": "MÉDIA",
+  "description": "Plateforme d'information généraliste : articles, podcasts (FM) et reportages vidéo (TV).",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FCFCFA",
+  "theme_color": "#0E7C3F",
+  "categories": ["news", "magazines"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Radio FM",
+      "short_name": "FM",
+      "url": "/",
+      "description": "Écouter les podcasts et chroniques"
+    },
+    {
+      "name": "Chaîne TV",
+      "short_name": "TV",
+      "url": "/",
+      "description": "Regarder les reportages et directs"
+    }
+  ]
+}

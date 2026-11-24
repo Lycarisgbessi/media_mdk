@@ -1,0 +1,389 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* ===== Charte de marque du média (§17.2) ===== */
+  --color-marque: var(--marque);
+  --color-marque-fonce: var(--marque-fonce);
+  --color-marque-clair: var(--marque-clair);
+  --color-jaune: var(--jaune);
+  --color-jaune-clair: var(--jaune-clair);
+  --color-rouge: var(--rouge);
+  --color-rouge-clair: var(--rouge-clair);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Couleurs de marque — vert dominant, jaune accent, rouge signal */
+  --marque: #0E7C3F;
+  --marque-fonce: #085A2C;
+  --marque-clair: #E9F5EE;
+  --jaune: #F2C200;
+  --jaune-clair: #FCF3D4;
+  --rouge: #D92632;
+  --rouge-clair: #FBE9EA;
+
+  --background: #FCFCFA;
+  --foreground: #14181A;
+  --card: #FFFFFF;
+  --card-foreground: #14181A;
+  --popover: #FFFFFF;
+  --popover-foreground: #14181A;
+  --primary: #0E7C3F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F0F2EF;
+  --secondary-foreground: #1A2420;
+  --muted: #F0F2EF;
+  --muted-foreground: #5B6660;
+  --accent: #EDF2EE;
+  --accent-foreground: #0E3D22;
+  --destructive: #D92632;
+  --border: #E3E7E2;
+  --input: #DCE1DC;
+  --ring: #0E7C3F;
+  --chart-1: #0E7C3F;
+  --chart-2: #F2C200;
+  --chart-3: #D92632;
+  --chart-4: #4BA471;
+  --chart-5: #8C6D1F;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #14181A;
+  --sidebar-primary: #0E7C3F;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EDF2EE;
+  --sidebar-accent-foreground: #0E3D22;
+  --sidebar-border: #E3E7E2;
+  --sidebar-ring: #0E7C3F;
+}
+
+.dark {
+  --marque: #35B56E;
+  --marque-fonce: #1E7A44;
+  --marque-clair: #12291B;
+  --jaune: #F5CB1F;
+  --jaune-clair: #2E2712;
+  --rouge: #F04350;
+  --rouge-clair: #331418;
+
+  --background: #0E1210;
+  --foreground: #E9EDEA;
+  --card: #161B18;
+  --card-foreground: #E9EDEA;
+  --popover: #161B18;
+  --popover-foreground: #E9EDEA;
+  --primary: #35B56E;
+  --primary-foreground: #08130C;
+  --secondary: #1E2521;
+  --secondary-foreground: #E9EDEA;
+  --muted: #1E2521;
+  --muted-foreground: #97A29B;
+  --accent: #1C2A21;
+  --accent-foreground: #BFE8D0;
+  --destructive: #F04350;
+  --border: #272E2A;
+  --input: #2C342F;
+  --ring: #35B56E;
+  --chart-1: #35B56E;
+  --chart-2: #F5CB1F;
+  --chart-3: #F04350;
+  --chart-4: #6FCB95;
+  --chart-5: #D9B44A;
+  --sidebar: #161B18;
+  --sidebar-foreground: #E9EDEA;
+  --sidebar-primary: #35B56E;
+  --sidebar-primary-foreground: #08130C;
+  --sidebar-accent: #1C2A21;
+  --sidebar-accent-foreground: #BFE8D0;
+  --sidebar-border: #272E2A;
+  --sidebar-ring: #35B56E;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "kern";
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* ===== Utilitaires de marque ===== */
+
+.text-gradient-marque {
+  background: linear-gradient(120deg, var(--marque) 0%, var(--marque-fonce) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Barre de défilement soignée pour les zones scrollables */
+.scroll-slim {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.scroll-slim::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-slim::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+.scroll-slim::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ===== Bandeau flash info : défilement continu, pause au survol ===== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.flash-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+.flash-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ===== Badge EN DIRECT : point pulsant ===== */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+.live-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+/* ===== Contenu d'article (typographie éditoriale) ===== */
+.article-body {
+  font-size: 1.075rem;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+.article-body p {
+  margin: 0 0 1.1em;
+}
+.article-body h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 1.6em 0 0.6em;
+  padding-left: 0.65rem;
+  border-left: 4px solid var(--marque);
+  line-height: 1.3;
+}
+.article-body h3 {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin: 1.3em 0 0.5em;
+}
+.article-body blockquote {
+  margin: 1.4em 0;
+  padding: 0.9em 1.2em;
+  border-left: 4px solid var(--jaune);
+  background: var(--jaune-clair);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+}
+.dark .article-body blockquote {
+  background: var(--jaune-clair);
+}
+.article-body ul {
+  margin: 0 0 1.1em 1.2em;
+  list-style: disc;
+}
+.article-body li {
+  margin-bottom: 0.35em;
+}
+.article-body a {
+  color: var(--marque);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.dark .article-body a {
+  color: #5BC589;
+}
+.article-body img {
+  border-radius: 0.75rem;
+  margin: 1.2em 0;
+  max-width: 100%;
+  height: auto;
+}
+.article-body code {
+  background: var(--muted);
+  padding: 0.15em 0.4em;
+  border-radius: 0.3rem;
+  font-size: 0.9em;
+}
+.article-body iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  border-radius: 0.75rem;
+  margin: 1.2em 0;
+}
+.article-body .video-embed {
+  margin: 1.2em 0;
+}
+
+/* Intégration d'un épisode audio FM au fil du texte (div injecté côté vue) */
+.audio-embed {
+  margin: 1.2em 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--muted);
+}
+.audio-embed p {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.audio-embed audio {
+  width: 100%;
+}
+.audio-embed .audio-embed-error {
+  margin: 0;
+  color: var(--rouge);
+  font-weight: 500;
+}
+
+/* ---- Éditeur visuel (WYSIWYG) de l'espace rédaction ---- */
+.rich-content {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.rich-content p {
+  margin: 0 0 0.9em;
+}
+.rich-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 1.4em 0 0.5em;
+  padding-left: 0.65rem;
+  border-left: 4px solid var(--marque);
+}
+.rich-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 1.2em 0 0.4em;
+}
+.rich-content blockquote {
+  margin: 1.2em 0;
+  padding: 0.8em 1.1em;
+  border-left: 4px solid var(--jaune);
+  background: var(--jaune-clair);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+}
+.rich-content ul {
+  margin: 0 0 1em 1.3em;
+  list-style: disc;
+}
+.rich-content ol {
+  margin: 0 0 1em 1.3em;
+  list-style: decimal;
+}
+.rich-content li {
+  margin-bottom: 0.3em;
+}
+.rich-content a {
+  color: var(--marque);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.rich-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1em 0;
+}
+.rich-content iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  border-radius: 0.75rem;
+  margin: 1em 0;
+}
+.rich-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: hsl(var(--muted-foreground) / 0.6);
+}
+
+/* Respect de prefers-reduced-motion (§17.5) */
+@media (prefers-reduced-motion: reduce) {
+  .flash-marquee,
+  .live-dot {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Polices d'affichage des articles (§17.4) ===== */
+.font-article-moderne {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+.font-article-classique {
+  font-family: Georgia, "Times New Roman", serif;
+}
+.font-article-elegant {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+.font-article-dynamique {
+  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+}

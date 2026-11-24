@@ -1,0 +1,417 @@
+// =====================================================================
+// Plateforme Média — Schéma de données
+// Conçu selon le cahier des charges v3.0 (§6)
+// Portable : SQLite en développement, PostgreSQL en production
+// (clés UUID, created_at/updated_at partout, suppression logique)
+// =====================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Connexion directe (hors pooler) pour les commandes Prisma : db push, seed, migrate
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------
+// Utilisateurs et accès
+// ---------------------------------------------------------------------
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  role         String    @default("journalist")
+  // admin | editor_in_chief | journalist | audio_producer | video_manager | moderator | ad_manager
+  avatarUrl    String?
+  bio          String?
+  status       String    @default("active") // active | suspended
+  twofaEnabled Boolean   @default(false)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  articles      Article[]        @relation("Author")
+  audioContents AudioContent[]   @relation("AudioAuthor")
+  videos        Video[]          @relation("VideoAuthor")
+  auditLogs     AuditLog[]
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  userName  String?
+  action    String
+  entity    String
+  entityId  String?
+  data      String? // JSON avant/après
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------
+// Contenu éditorial : rubriques et articles
+// ---------------------------------------------------------------------
+
+model Category {
+  id              String   @id @default(uuid())
+  parentId        String?
+  parent          Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children        Category[] @relation("CategoryTree")
+  name            String
+  slug            String   @unique
+  description     String?
+  color           String   @default("#0E7C3F")
+  icon            String? // nom d'icône lucide
+  imageUrl        String? // Cloudinary en prod
+  order           Int      @default(0)
+  visibleMenu     Boolean  @default(true)
+  visibleHome     Boolean  @default(true)
+  metaTitle       String?
+  metaDescription String?
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+
+  articles      Article[]
+  audioContents AudioContent[]
+  videos        Video[]
+  audioShows    AudioShow[]
+}
+
+model Article {
+  id             String    @id @default(uuid())
+  type           String    @default("article") // article | analyse | interview | tribune | chronique
+  title          String
+  subtitle       String?
+  slug           String    @unique
+  lede           String? // chapeau
+  content        String    @default("") // HTML
+  coverImageUrl  String?
+  coverCaption   String?
+  coverCredit    String?
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id])
+  authorId       String?
+  author         User?     @relation("Author", fields: [authorId], references: [id])
+  status         String    @default("draft") // draft | review | approved | scheduled | published | archived
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  isFeatured     Boolean   @default(false)
+  featuredRank   Int?
+  commentsOpen   Boolean   @default(true)
+  readingTime    Int       @default(2)
+  views          Int       @default(0)
+  metaTitle      String?
+  metaDescription String?
+  metaKeywords   String?
+  ogImageUrl     String?
+  fontId         String? // police d'affichage choisie (§17.4)
+  seoScore       Int       @default(0)
+  language       String    @default("fr")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  tags     ArticleTag[]
+  comments Comment[]
+  videos   Video[]
+}
+
+model Tag {
+  id       String       @id @default(uuid())
+  name     String
+  slug     String       @unique
+  articles ArticleTag[]
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+}
+
+model FlashInfo {
+  id        String    @id @default(uuid())
+  text      String
+  link      String?
+  level     String    @default("info") // info | urgent | live
+  active    Boolean   @default(true)
+  startsAt  DateTime?
+  endsAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model HomepageBlock {
+  id       String  @id @default(uuid())
+  type     String // featured | latest | flash | fm | tv | most_read | newsletter | category | ads | social
+  title    String?
+  source   String?
+  order    Int     @default(0)
+  active   Boolean @default(true)
+  settings String? // JSON
+}
+
+// ---------------------------------------------------------------------
+// Module FM (audio)
+// ---------------------------------------------------------------------
+
+model AudioContent {
+  id               String    @id @default(uuid())
+  type             String    @default("podcast") // podcast | chronique | reportage_audio | episode
+  title            String
+  slug             String    @unique
+  description      String?
+  categoryId       String?
+  category         Category? @relation(fields: [categoryId], references: [id])
+  authorId         String?
+  author           User?     @relation("AudioAuthor", fields: [authorId], references: [id])
+  showId           String?
+  show             AudioShow? @relation(fields: [showId], references: [id])
+  googleDriveFileId String?
+  googleDriveUrl   String?
+  duration         Int       @default(0) // secondes
+  coverImageUrl    String?
+  status           String    @default("draft") // draft | review | approved | scheduled | published | archived
+  publishedAt      DateTime?
+  scheduledAt      DateTime?
+  season           Int?
+  episodeNumber    Int?
+  transcription    String? // résumé/transcription recommandé SEO
+  metaTitle        String?
+  metaDescription  String?
+  metaKeywords     String?
+  seoScore         Int       @default(0)
+  views            Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  deletedAt        DateTime?
+
+  comments Comment[]
+}
+
+model AudioShow {
+  id            String    @id @default(uuid())
+  name          String
+  slug          String    @unique
+  description   String?
+  coverImageUrl String?
+  hostNames     String?
+  categoryId    String?
+  category      Category? @relation(fields: [categoryId], references: [id])
+  driveFolderUrl String?
+  order         Int       @default(0)
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  contents   AudioContent[]
+  schedule   AudioSchedule[]
+}
+
+model AudioSchedule {
+  id         String    @id @default(uuid())
+  showId     String
+  show       AudioShow @relation(fields: [showId], references: [id], onDelete: Cascade)
+  day        String // lundi..dimanche
+  time       String // HH:mm
+  recurrence String    @default("weekly") // weekly | daily | biweekly
+  active     Boolean   @default(true)
+}
+
+// ---------------------------------------------------------------------
+// Module TV (vidéo)
+// ---------------------------------------------------------------------
+
+model Video {
+  id             String    @id @default(uuid())
+  articleId      String?
+  article        Article?  @relation(fields: [articleId], references: [id])
+  title          String
+  youtubeUrl     String
+  youtubeId      String
+  thumbnailUrl   String?
+  duration       Int?
+  description    String?
+  type           String    @default("reportage") // reportage | replay | extrait
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id])
+  authorId       String?
+  author         User?     @relation("VideoAuthor", fields: [authorId], references: [id])
+  status         String    @default("draft") // draft | review | approved | scheduled | published | archived
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  order          Int       @default(0)
+  transcription  String?
+  metaTitle      String?
+  metaDescription String?
+  seoScore       Int       @default(0)
+  views          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  comments Comment[]
+}
+
+model LiveStream {
+  id             String    @id @default(uuid())
+  title          String
+  description    String?
+  youtubeUrl     String
+  youtubeId      String
+  thumbnailUrl   String?
+  status         String    @default("scheduled") // scheduled | live | ended | cancelled
+  scheduledStart DateTime?
+  actualStart    DateTime?
+  actualEnd      DateTime?
+  categoryId     String?
+  featured       Boolean   @default(false)
+  replayVideoId  String?
+  views          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+// ---------------------------------------------------------------------
+// Interaction
+// ---------------------------------------------------------------------
+
+model Comment {
+  id          String        @id @default(uuid())
+  articleId   String?
+  article     Article?      @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  audioId     String?
+  audio       AudioContent? @relation(fields: [audioId], references: [id], onDelete: Cascade)
+  videoId     String?
+  video       Video?        @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  parentId    String?
+  parent      Comment?      @relation("CommentThread", fields: [parentId], references: [id])
+  replies     Comment[]     @relation("CommentThread")
+  authorName  String
+  authorEmail String
+  content     String
+  status      String        @default("pending") // pending | approved | rejected | spam
+  ipHash      String?
+  reports     Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model ContactMessage {
+  id            String    @id @default(uuid())
+  name          String
+  email         String
+  phone         String?
+  subject       String
+  message       String
+  attachmentUrl String?
+  status        String    @default("new") // new | read | answered | archived
+  note          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model ShareEvent {
+  id          String   @id @default(uuid())
+  contentType String // article | audio | video | live
+  contentId   String
+  channel     String
+  createdAt   DateTime @default(now())
+}
+
+model ContentView {
+  id          String   @id @default(uuid())
+  contentType String // article | audio | video | live
+  contentId   String
+  day         String // YYYY-MM-DD
+  count       Int      @default(1)
+
+  @@unique([contentType, contentId, day])
+}
+
+// ---------------------------------------------------------------------
+// Publicité
+// ---------------------------------------------------------------------
+
+model AdSlot {
+  id        String  @id @default(uuid())
+  key       String  @unique // header_banner | home_top | sidebar | article_inline | mobile_sticky | fm_sidebar | tv_sidebar
+  name      String
+  placement String
+  active    Boolean @default(true)
+  width     Int?
+  height    Int?
+  creatives AdCreative[]
+}
+
+model Advertiser {
+  id         String  @id @default(uuid())
+  name       String
+  contactName String?
+  email      String?
+  phone      String?
+  active     Boolean @default(true)
+  createdAt  DateTime @default(now())
+  creatives  AdCreative[]
+}
+
+model AdCreative {
+  id           String     @id @default(uuid())
+  slotId       String
+  slot         AdSlot     @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  advertiserId String?
+  advertiser   Advertiser? @relation(fields: [advertiserId], references: [id])
+  name         String
+  imageUrl     String?
+  htmlCode     String?
+  linkUrl      String?
+  weight       Int        @default(1)
+  active       Boolean    @default(true)
+  startsAt     DateTime?
+  endsAt       DateTime?
+  impressions  Int        @default(0)
+  clicks       Int        @default(0)
+  createdAt    DateTime   @default(now())
+}
+
+// ---------------------------------------------------------------------
+// Configuration
+// ---------------------------------------------------------------------
+
+model SiteSetting {
+  key   String @id
+  value String // JSON
+}
+
+model TypographyOption {
+  id        String  @id @default(uuid())
+  name      String
+  cssFamily String
+  usage     String  @default("corps") // titres | corps
+  active    Boolean @default(true)
+  order     Int     @default(0)
+}
+
+model Page {
+  id              String   @id @default(uuid())
+  slug            String   @unique // a-propos | mentions-legales | confidentialite | cgu | moderation
+  title           String
+  content         String   @default("") // HTML
+  metaTitle       String?
+  metaDescription String?
+  updatedAt       DateTime @updatedAt
+  createdAt       DateTime @default(now())
+}
