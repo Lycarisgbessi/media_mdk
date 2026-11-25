@@ -238,16 +238,16 @@ export function Footer() {
             © {year} {settings?.siteName || 'Média'} — Tous droits réservés.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            <button type="button" onClick={() => goPage('mentions-legales')} className="inline-flex min-h-[36px] items-center px-1 transition-colors hover:text-jaune">
+            <button type="button" onClick={() => goPage('mentions-legales')} className="inline-flex min-h-[36px] items-center px-2 transition-colors hover:text-jaune">
               Mentions légales
             </button>
-            <button type="button" onClick={() => goPage('confidentialite')} className="inline-flex min-h-[36px] items-center px-1 transition-colors hover:text-jaune">
+            <button type="button" onClick={() => goPage('confidentialite')} className="inline-flex min-h-[36px] items-center px-2 transition-colors hover:text-jaune">
               Confidentialité
             </button>
-            <button type="button" onClick={() => goPage('cgu')} className="inline-flex min-h-[36px] items-center px-1 transition-colors hover:text-jaune">
+            <button type="button" onClick={() => goPage('cgu')} className="inline-flex min-h-[36px] items-center px-2 transition-colors hover:text-jaune">
               CGU
             </button>
-            <button type="button" onClick={() => navigate({ name: 'contact' })} className="inline-flex min-h-[36px] items-center px-1 transition-colors hover:text-jaune">
+            <button type="button" onClick={() => navigate({ name: 'contact' })} className="inline-flex min-h-[36px] items-center px-2 transition-colors hover:text-jaune">
               Contact
             </button>
           </div>

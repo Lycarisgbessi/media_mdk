@@ -176,7 +176,7 @@ export function TVView() {
         <Tabs value={filter} onValueChange={setFilter}>
           <TabsList aria-label="Filtrer les vidéos par type">
             {TYPE_FILTERS.map((f) => (
-              <TabsTrigger key={f.value} value={f.value}>
+              <TabsTrigger key={f.value} value={f.value} className="min-h-[36px]">
                 {f.label}
               </TabsTrigger>
             ))}

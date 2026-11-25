@@ -25,7 +25,7 @@ export function Breadcrumb({ items, className }: { items: BreadcrumbItem[]; clas
               <button
                 type="button"
                 onClick={item.onClick}
-                className="min-h-[28px] rounded px-0.5 transition-colors hover:text-marque focus-visible:outline-2 focus-visible:outline-marque"
+                className="min-h-[36px] rounded px-0.5 transition-colors hover:text-marque focus-visible:outline-2 focus-visible:outline-marque"
               >
                 {item.label}
               </button>
