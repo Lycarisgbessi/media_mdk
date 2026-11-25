@@ -88,7 +88,7 @@ function EpisodeCard({
         className="min-w-0 flex-1 text-left"
       >
         <span className="flex flex-wrap items-center gap-1.5">
-          <Badge variant="outline" className="border-marque/40 bg-marque-clair px-1.5 py-0 text-[10px] font-semibold text-marque-fonce dark:text-foreground">
+          <Badge variant="outline" className="border-marque/40 bg-marque-clair px-1.5 py-0 text-[11px] font-semibold text-marque-fonce dark:text-foreground">
             {typeLabel(episode.type)}
           </Badge>
         </span>

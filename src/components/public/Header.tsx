@@ -347,7 +347,7 @@ export function Header() {
               variant="ghost"
               size="sm"
               onClick={() => navigate({ name: 'live', id: liveId })}
-              className="mr-1 hidden min-h-[36px] gap-2 rounded-full bg-rouge px-3 text-[11px] font-black uppercase tracking-widest text-white hover:bg-rouge/90 hover:text-white sm:inline-flex"
+              className="mr-1 hidden min-h-[36px] gap-2 rounded-full bg-rouge px-3 text-[11px] font-black uppercase tracking-widest text-white hover:bg-rouge/90 hover:text-white lg:inline-flex"
               aria-label="Regarder le direct"
             >
               <span className="live-dot h-2 w-2 rounded-full bg-white" aria-hidden="true" />

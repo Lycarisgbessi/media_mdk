@@ -48,7 +48,7 @@ function LiveBanner({ live }: { live: LiveStreamPayload }) {
         <Play className="h-6 w-6 fill-current" aria-hidden="true" />
       </span>
       <span className="relative min-w-0 flex-1">
-        <span className="inline-flex items-center gap-2 rounded-full bg-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-rouge">
+        <span className="inline-flex items-center gap-2 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-black uppercase tracking-widest text-rouge">
           <span className="live-dot h-2 w-2 rounded-full bg-rouge" aria-hidden="true" />
           En direct maintenant
         </span>
@@ -161,7 +161,7 @@ export function TVView() {
               onClick={() => navigate({ name: 'live', id: live.id })}
               className="flex min-h-[44px] items-center gap-3 rounded-lg border border-dashed border-rouge/40 bg-rouge-clair/50 px-4 py-3 text-left transition-colors hover:bg-rouge-clair dark:bg-rouge/10"
             >
-              <span className="rounded-full bg-rouge px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
+              <span className="rounded-full bg-rouge px-2 py-0.5 text-[11px] font-black uppercase tracking-widest text-white">
                 Prochain direct
               </span>
               <span className="min-w-0 flex-1 truncate text-sm font-semibold">{live.title}</span>

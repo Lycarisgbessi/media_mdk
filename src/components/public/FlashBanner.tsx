@@ -92,17 +92,17 @@ export function FlashBanner() {
             <Zap className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
             Flash
           </div>
-          <div className="relative min-w-0 flex-1 overflow-hidden py-2" aria-live="off">
+          <div className="relative min-w-0 flex-1 overflow-hidden py-1.5" aria-live="off">
             <div className="flash-marquee text-xs sm:text-sm">
               {items.map((f, i) => (
                 <span key={`${f.id}-${i}`} className="mx-5 inline-flex items-center gap-2 sm:mx-8">
                   {f.level === 'urgent' && (
-                    <span className="rounded bg-white px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-rouge">
+                    <span className="rounded bg-white px-1.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-rouge">
                       Urgent
                     </span>
                   )}
                   {f.level === 'live' && (
-                    <span className="inline-flex items-center gap-1.5 rounded bg-white px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-rouge">
+                    <span className="inline-flex items-center gap-1.5 rounded bg-white px-1.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-rouge">
                       <span className="live-dot h-1.5 w-1.5 rounded-full bg-rouge" aria-hidden="true" />
                       En direct
                     </span>
@@ -112,7 +112,8 @@ export function FlashBanner() {
                       type="button"
                       onClick={() => openLink(f.link ?? '')}
                       className={cn(
-                        'font-medium underline decoration-white/50 underline-offset-2 transition-colors hover:decoration-white',
+                        // py-2.5 : zone tactile confortable (≥34px) sur le bandeau défilant
+                        'py-2.5 font-medium underline decoration-white/50 underline-offset-2 transition-colors hover:decoration-white',
                         f.level === 'urgent' && 'font-bold'
                       )}
                     >
